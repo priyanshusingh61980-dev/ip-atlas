@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Color tokens — RGB triplets so Tailwind alpha modifiers work.
+       Light theme is default. Token names preserved (e.g. bg-obsidian) so
+       existing component classes keep working; values are inverted to a
+       refined paper-white palette with a vivid editorial-blue accent. */
+    --bg-obsidian: 252 252 250; /* canonical page background (warm paper) */
+    --bg-graphite: 246 246 242; /* section background */
+    --bg-charcoal: 238 238 232; /* hover / elevated panel */
+    --surface-1: 255 255 255; /* card / form surface */
+    --surface-2: 248 248 244; /* subtle inset surface */
+    --border-hairline: 17 24 39; /* dark slate, used with low alpha */
+    --text-primary: 17 24 39; /* near-black slate */
+    --text-secondary: 75 85 99;
+    --text-tertiary: 130 138 152;
+    --accent-electric: 37 99 235; /* editorial blue */
+    --accent-silver: 100 110 125;
+    --danger: 220 38 38;
+    --success: 22 163 74;
+  }
+
+  html {
+    color-scheme: light;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-sans;
+    font-feature-settings: "cv11", "ss01", "ss03";
+    min-height: 100vh;
+    color: rgb(var(--text-primary));
+    background:
+      radial-gradient(
+        1200px 600px at 50% -200px,
+        rgb(var(--accent-electric) / 0.1),
+        transparent 60%
+      ),
+      rgb(var(--bg-obsidian));
+  }
+
+  ::selection {
+    background-color: rgb(var(--accent-electric) / 0.22);
+    color: rgb(var(--text-primary));
+  }
+
+  *:focus-visible {
+    outline: 2px solid rgb(var(--accent-electric));
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Hairline borders — subtle dark stroke on light surface */
+  .border-hairline {
+    border-color: rgb(var(--border-hairline) / 0.1);
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgb(255 255 255 / 0.65);
+    backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    border: 1px solid rgb(var(--border-hairline) / 0.08);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
